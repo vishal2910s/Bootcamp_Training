@@ -38,14 +38,19 @@ console.log(employees.filter(filter_by_salary));
 
 //group employee on the basis of their age
 
-var groupBy = function(xs, key) {
-  return xs.reduce(function(rv, x) {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
-};
+groupEmps = {}
+for(var i=0;i<employees.length;i++){
+    if(groupEmps.hasOwnProperty(employees[i]['age'])){
+        groupEmps[employees[i]['age']].push(employees[i]);
+    }
+    else{
+        groupEmps[employees[i]['age']] = [];
+        groupEmps[employees[i]['age']].push(employees[i]);
+    }
+}
 
-console.log(groupBy(employees, "age"));
+console.log("Grouped employees on the basis of their ages are: ")
+console.log(groupEmps);
 
 //fetch employees with salary less than 1000 and age greater than 20. Then give them an increment 5 times their salary.
 
